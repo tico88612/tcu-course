@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "build": "electron-packager . TCUCourse --out TCUCourse --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
     "css-build": "node-sass --omit-source-map-url sass/bulma.scss css/bulma.css",
     "css-watch": "npm run css-build -- --watch"
   },
@@ -15,12 +16,12 @@
     "demo"
   ],
   "author": "GitHub",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "devDependencies": {
     "bulma": "^0.7.5",
     "electron": "^6.0.7",
-    "node-sass": "^4.12.0",
-    "vue": "^2.6.10"
+    "electron-packager": "^14.0.5",
+    "node-sass": "^4.12.0"
   },
   "dependencies": {}
 }
