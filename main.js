@@ -12,7 +12,7 @@ function createWindow () {
     width: 800,
     height: 600,
     resizable: false,
-    icon: path.join(__dirname, 'icon/favicon.png')
+    icon: path.join(__dirname, 'icon/apple.icns')
   })
 
   // and load the index.html of the app.
