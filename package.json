@@ -1,0 +1,25 @@
+{
+  "name": "tcu-course",
+  "version": "0.1.0",
+  "description": "A minimal TCU Course",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "css-build": "node-sass --omit-source-map-url sass/bulma.scss css/bulma.css",
+    "css-watch": "npm run css-build -- --watch"
+  },
+  "repository": "https://github.com/tico88612/tcu-course",
+  "keywords": [
+    "TCU",
+    "Course",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "bulma": "^0.7.5",
+    "electron": "^6.0.7",
+    "node-sass": "^4.12.0"
+  },
+  "dependencies": {}
+}

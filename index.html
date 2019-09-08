@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>慈濟大學搶課程式 v0.1.0</title>
+  <link rel="stylesheet" href="css/bulma.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+  <section class="hero is-primary is-fullheight">
+    <div class="hero-body">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+            <form action="" class="box">
+              <div class="field">
+                <label for="studentID" class="label">學號 Student ID</label>
+                <div class="control has-icons-left">
+                  <input type="text" id="studentID" name="studentID" placeholder="e.g. 108xxxxxx" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="studentPWD" class="label">密碼 Password</label>
+                <div class="control has-icons-left">
+                  <input type="password" id="studentPWD" name="studentPWD" placeholder="*******" class="input" required>
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <label for="course" class="label">課程代碼 Course ID</label>
+                <div class="control">
+                  <input type="text" id="courseID1" name="courseID1" class="input" required>
+                </div>
+              </div>
+              <div class="field">
+                <button class="button is-success">
+                  開始
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
