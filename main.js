@@ -12,7 +12,10 @@ function createWindow () {
     width: 800,
     height: 600,
     resizable: false,
-    icon: path.join(__dirname, 'icon/apple.icns')
+    icon: path.join(__dirname, 'icon/apple.icns'),
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   // and load the index.html of the app.
@@ -50,3 +53,23 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+const { ipcMain } = require('electron')
+
+let userId, userPwd;
+
+ipcMain.on('login-user-function', startSession)
+
+function startSession(event, arg1, arg2) {
+  userId = arg1;
+  userPwd = arg2;
+}
+
+ipcMain.on('add-count', (event, arg) => {
+  count++
+  mainWindow.webContents.send('res-count', count)
+})
+
+ipcMain.on('req-count', (event, arg) => {
+  event.sender.send('res-count', count)
+})

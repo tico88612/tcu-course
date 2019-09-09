@@ -7,7 +7,7 @@
     "start": "electron .",
     "build": "electron-packager . TCUCourse --out=out TCUCourse --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
     "css-build": "node-sass --omit-source-map-url sass/bulma.scss css/bulma.css",
-    "css-watch": "npm run css-build -- --watch"
+    "js-build": "webpack"
   },
   "repository": "https://github.com/tico88612/tcu-course",
   "keywords": [
@@ -15,13 +15,16 @@
     "Course",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "tico88612",
   "license": "MIT",
   "devDependencies": {
-    "bulma": "^0.7.5",
     "electron": "^6.0.7",
+    "electron-builder": "^21.2.0",
     "electron-packager": "^14.0.5",
     "node-sass": "^4.12.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "request": "^2.88.0"
+  }
 }

@@ -1,3 +1,10 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
+const { ipcRenderer } = require('electron')
+function updateCount(event, arg) {
+    document.getElementById('count').innerText = arg
+}
+function loginUser() {
+    let userId = document.getElementById('studentId').value
+    let userPwd = document.getElementById('studentPwd').value
+    ipcRenderer.send('login-user-function', userId, userPwd)
+}
+ipcRenderer.on('res-count', updateCount)
