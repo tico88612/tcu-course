@@ -36,15 +36,18 @@
               <div class="field">
                 <label for="course" class="label">課程代碼 Course ID</label>
                 <div class="control">
-                  <input type="text" id="courseID1" name="courseID1" class="input" required>
+                  <input type="text" id="courseID1" name="courseID1" class="input" disabled>
                 </div>
               </div>
               <div class="field">
-                <button id="loginBtn" class="button is-outlined is-primary" onclick="loginUser();">
+                <button id="loginBtn" class="button is-primary" onclick="loginUser();">
                   登入
                 </button>
-                <button id="startRunBtn" class="button is-outlined is-info" onclick="startRun();" disabled>
+                <button id="startRunBtn" class="button is-info" onclick="startRun();" disabled>
                   開始
+                </button>
+                <button id="endRunBtn" class="button is-danger" onclick="endRun();" disabled>
+                  結束
                 </button>
               </div>
             </div>

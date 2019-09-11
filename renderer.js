@@ -23,10 +23,20 @@ function loginSuccess(params) {
     document.getElementById('loginBtn').innerHTML = "登入成功";
     document.getElementById('loginBtn').disabled = true;
     document.getElementById('startRunBtn').disabled = false;
+    document.getElementById('courseID1').disabled = false;
 }
 
 function startRun(params){
-    
+    document.getElementById('courseID1').disabled = true;
+    document.getElementById('startRunBtn').disabled = true;
+    document.getElementById('endRunBtn').disabled = false;
 }
+
+function endRun(params) {
+    document.getElementById('courseID1').disabled = false;
+    document.getElementById('startRunBtn').disabled = false;
+    document.getElementById('endRunBtn').disabled = true;
+}
+
 ipcRenderer.on('login-Fail-Alert', loginFail)
 ipcRenderer.on('login-Success-Alert', loginSuccess)
