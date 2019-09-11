@@ -2,6 +2,7 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const log = require('electron-log');
+log.transports.console.level = 'info';
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -135,14 +136,190 @@ async function startSession(event, arg1, arg2) {
 function startSetInteval(event, arg1) {
   log.info("startSetInteval Function START");
   userCourseId = arg1
-  setIntervalCode = setInterval(TODO(), 60000);
+  setIntervalCode = setInterval(runToRushCourse, 60000);
   log.info("startSetInteval Function END");
 }
 
-function endSetInteval(event){
+function endSetInteval(){
   log.info("endSetInteval Function START");
   clearInterval(setIntervalCode);
   log.info("endSetInteval Function END");
+}
+
+async function restartSession(){
+  log.info("restartSession Function START");
+
+  log.info("restartSession GET Choose Course System Data START");
+  let htmlResponse = await useRequestPromise({
+    headers: {
+      'Cookie': userCookie
+    },
+    uri: "http://203.64.78.174/ScasWebSite/Default.aspx",
+    timeout: 30000,
+    followRedirect: true,
+    maxRedirects: 10,
+    simple: false
+  });
+  curlParseASPX(htmlResponse)
+  log.info("restartSession GET Choose Course System Data END");
+
+  log.info("restartSession Make POST Body Data START");
+  let form = {
+    "__EVENTTARGET": __EVENTTARGET,
+    "__EVENTARGUMENT": __EVENTARGUMENT,
+    "__VIEWSTATE": __VIEWSTATE,
+    "__EVENTVALIDATION": __EVENTVALIDATION,
+    "logUser$UserName": userId,
+    "logUser$Password": userPwd,
+    "logUser$LoginButton": "登　入"
+  }
+  let formData = querystring.stringify(form);
+  let formDataLength = formData.length;
+  log.debug("FormData: %s", formData);
+  log.debug("FormData - length: %d", formDataLength);
+  log.info("restartSession Make POST Body Data END");
+
+  log.info("restartSession POST Choose Course System Data START");
+  htmlResponse = await useRequestPromise({
+    headers: {
+      'Cookie': userCookie,
+      'Content-length': formDataLength,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    uri: "http://203.64.78.174/ScasWebSite/Default.aspx",
+    method: "POST",
+    body: formData,
+    timeout: 30000,
+    resolveWithFullResponse: true,
+    maxRedirects: 10,
+    simple: false
+  });
+
+  if (htmlResponse.statusCode === 302 && htmlResponse.body.indexOf('SelectAddCode.aspx') > -1) {
+    log.info("Login Successful!")
+  }
+  else {
+    log.info("Login Failure!")
+    event.sender.send('login-Fail-Alert')
+  }
+  log.info("restartSession POST Choose Course System Data END");
+
+  log.info("restartSession Function END");
+}
+
+async function runToRushCourse() {
+  log.info("runToRushCourse Function START");
+
+  log.info("GET Choose Course System SelectAddCode.aspx START");
+  let htmlResponse = await useRequestPromise({
+    headers: {
+      'Cookie': userCookie
+    },
+    uri: "http://203.64.78.174/ScasWebSite/SelectAddCode.aspx",
+    timeout: 30000,
+    followRedirect: true,
+    maxRedirects: 10,
+    simple: false
+  });
+  if (htmlResponse.indexOf('Object moved') > -1){
+    await restartSession();
+    htmlResponse = await useRequestPromise({
+      headers: {
+        'Cookie': userCookie
+      },
+      uri: "http://203.64.78.174/ScasWebSite/SelectAddCode.aspx",
+      timeout: 30000,
+      followRedirect: true,
+      maxRedirects: 10,
+      simple: false
+    });
+  }
+  curlParseASPX(htmlResponse)
+  log.info("GET Choose Course System SelectAddCode.aspx END");
+
+  log.info("MAKE POST Query START");
+  let form = {
+    "__EVENTTARGET": __EVENTTARGET,
+    "__EVENTARGUMENT": __EVENTARGUMENT,
+    "__VIEWSTATE": __VIEWSTATE,
+    "__VIEWSTATEENCRYPTED": __VIEWSTATEENCRYPTED,
+    "__EVENTVALIDATION": __EVENTVALIDATION,
+    "ctl00$hidBookMarker": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode0": userCourseId,
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode1": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode2": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode3": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode4": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode5": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$btnQuery": "查詢"
+  }
+  let formData = querystring.stringify(form);
+  let formDataLength = formData.length;
+  log.debug("FormData: %s", formData);
+  log.debug("FormData - length: %d", formDataLength);
+  log.info("MAKE POST Query END");
+
+  log.info("POST Choose Course System SelectAddCode.aspx Query START");
+  htmlResponse = await useRequestPromise({
+    headers: {
+      'Cookie': userCookie,
+      'Content-length': formDataLength,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    uri: "http://203.64.78.174/ScasWebSite/SelectAddCode.aspx",
+    method: "POST",
+    body: formData,
+    timeout: 30000,
+    followRedirect: true,
+    maxRedirects: 10,
+    simple: false
+  });
+  curlParseASPX(htmlResponse)
+  log.info("POST Choose Course System SelectAddCode.aspx Query END");
+
+  log.info("MAKE POST Choose START");
+  form = {
+    "__EVENTTARGET": "ctl00$ContentPlaceHolder1$WcClassListSelect1$gvStepFullClassList$ctl03$btnAdd",
+    "__EVENTARGUMENT": __EVENTARGUMENT,
+    "__VIEWSTATE": __VIEWSTATE,
+    "__VIEWSTATEENCRYPTED": __VIEWSTATEENCRYPTED,
+    "__EVENTVALIDATION": __EVENTVALIDATION,
+    "ctl00$hidBookMarker": "ctl00_ContentPlaceHolder1_WcClassListSelect1_gvStepFullClassList_ctl03_btnAdd",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode0": userCourseId,
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode1": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode2": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode3": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode4": "",
+    "ctl00$ContentPlaceHolder1$WcClassAddSwitch1$WcClassQueryCode1$txtCode5": "",
+  }
+  formData = querystring.stringify(form);
+  formDataLength = formData.length;
+  log.debug("FormData: %s", formData);
+  log.debug("FormData - length: %d", formDataLength);
+  log.info("MAKE POST Choose END");
+
+  log.info("POST Choose Course System SelectAddCode.aspx Choose START");
+  htmlResponse = await useRequestPromise({
+    headers: {
+      'Cookie': userCookie,
+      'Content-length': formDataLength,
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    uri: "http://203.64.78.174/ScasWebSite/SelectAddCode.aspx",
+    method: "POST",
+    body: formData,
+    timeout: 30000,
+    followRedirect: true,
+    maxRedirects: 10,
+    simple: false
+  });
+  if (htmlResponse.toString().indexOf('加選成功！') > -1){
+    endSetInteval();
+    alert("加選成功！請到選課網站確認！感謝您的使用！\n\nAuthor By tico88612")
+  }
+  log.info("POST Choose Course System SelectAddCode.aspx Choose END");
+
+  log.info("runToRushCourse Function END");
 }
 
 function curlParseASPX(body){
