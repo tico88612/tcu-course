@@ -1,9 +1,5 @@
 const { ipcRenderer } = require('electron')
 
-function updateCount(event, arg) {
-    document.getElementById('count').innerText = arg
-}
-
 function loginUser() {
     let userId = document.getElementById('studentId').value
     let userPwd = document.getElementById('studentPwd').value
@@ -37,7 +33,15 @@ function startRun(params){
 
 function endRun(params) {
     ipcRenderer.send('end-run-function')
-    
+
+    document.getElementById('courseID1').disabled = false;
+    document.getElementById('startRunBtn').disabled = false;
+    document.getElementById('endRunBtn').disabled = true;
+}
+
+function completeChoose(params){
+    alert("加選成功！請到選課網站確認！感謝您的使用！\n\nAuthor By tico88612")
+
     document.getElementById('courseID1').disabled = false;
     document.getElementById('startRunBtn').disabled = false;
     document.getElementById('endRunBtn').disabled = true;
@@ -45,3 +49,4 @@ function endRun(params) {
 
 ipcRenderer.on('login-Fail-Alert', loginFail)
 ipcRenderer.on('login-Success-Alert', loginSuccess)
+ipcRenderer.on('complete-choose', completeChoose)

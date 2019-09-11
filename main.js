@@ -136,7 +136,8 @@ async function startSession(event, arg1, arg2) {
 function startSetInteval(event, arg1) {
   log.info("startSetInteval Function START");
   userCourseId = arg1
-  setIntervalCode = setInterval(runToRushCourse, 60000);
+  runToRushCourse(event);
+  setIntervalCode = setInterval(runToRushCourse, 60000, event);
   log.info("startSetInteval Function END");
 }
 
@@ -207,7 +208,7 @@ async function restartSession(){
   log.info("restartSession Function END");
 }
 
-async function runToRushCourse() {
+async function runToRushCourse(event) {
   log.info("runToRushCourse Function START");
 
   log.info("GET Choose Course System SelectAddCode.aspx START");
@@ -315,7 +316,7 @@ async function runToRushCourse() {
   });
   if (htmlResponse.toString().indexOf('加選成功！') > -1){
     endSetInteval();
-    alert("加選成功！請到選課網站確認！感謝您的使用！\n\nAuthor By tico88612")
+    event.sender.send('complete-choose')
   }
   log.info("POST Choose Course System SelectAddCode.aspx Choose END");
 

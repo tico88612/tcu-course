@@ -1,11 +1,13 @@
 {
   "name": "tcu-course",
   "version": "0.1.0",
-  "description": "A minimal TCU Course",
+  "description": "A minimal Rush TCU Course",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . TCUCourse --out=out --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
+    "build": "electron-builder -mwl",
+    "build:mac": "electron-packager . TCUCourse --out=out --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
+    "build:win": "electron-packager . TCUCourse --out=out --overwrite --platform=win32 --arch=x64 --icon=icon/win.png --prune=true --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
     "css-build": "node-sass --omit-source-map-url sass/bulma.scss css/bulma.css",
     "js-build": "webpack"
   },
@@ -31,5 +33,22 @@
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "build": { 
+    "productName": "慈濟大學 搶課系統",
+    "appId": "idv.tico88612.tcucourse",
+    "copyright": "MIT",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "icon/win.png"
+    },
+    "mac": {
+      "icon": "icon/apple.icns"
+    },
+    "linux": {
+      "icon": "icon/win.png"
+    }
   }
 }
