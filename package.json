@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . TCUCourse --out=out TCUCourse --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
+    "build": "electron-packager . TCUCourse --out=out --overwrite --platform=darwin --arch=x64 --icon=icon/apple.icns --prune=true --squirrel-install --ignore=node_modules/electron-* --electron-version=6.0.7 --version-string.CompanyName=Jerry --version-string.ProductName=TCUCourse",
     "css-build": "node-sass --omit-source-map-url sass/bulma.scss css/bulma.css",
     "js-build": "webpack"
   },
@@ -27,6 +27,7 @@
     "bulma": "^0.7.5",
     "electron-log": "^3.0.7",
     "jquery": "^3.4.1",
+    "path": "^0.12.7",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
