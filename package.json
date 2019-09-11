@@ -30,7 +30,6 @@
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "set-interval-async": "^1.0.29"
+    "request-promise": "^4.2.4"
   }
 }
