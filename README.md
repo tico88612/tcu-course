@@ -23,5 +23,5 @@ git clone https://github.com/tico88612/tcu-course.git
 cd tcu-course
 npm install
 npm start
-npm build   // if you want to build
+npm build    if you want to build
 ```
