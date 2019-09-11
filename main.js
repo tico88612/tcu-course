@@ -61,11 +61,13 @@ const rp = require('request-promise')
 const querystring = require('querystring')
 
 let __EVENTTARGET = "", __EVENTARGUMENT = "", __VIEWSTATE = "", __VIEWSTATEENCRYPTED = "", __EVENTVALIDATION = ""
-let userId = "", userPwd = "", userCourse = ""
+let userId = "", userPwd = "", userCourseId = ""
 let userCookie = ""
 let setIntervalCode = ""
 
 ipcMain.on('login-user-function', startSession)
+ipcMain.on('start-run-function', startSetInteval)
+ipcMain.on('end-run-function', endSetInteval)
 
 async function startSession(event, arg1, arg2) {
   log.info("startSession Function START");
@@ -132,8 +134,15 @@ async function startSession(event, arg1, arg2) {
 
 function startSetInteval(event, arg1) {
   log.info("startSetInteval Function START");
-  userCourse = arg1
+  userCourseId = arg1
+  setIntervalCode = setInterval(TODO(), 60000);
   log.info("startSetInteval Function END");
+}
+
+function endSetInteval(event){
+  log.info("endSetInteval Function START");
+  clearInterval(setIntervalCode);
+  log.info("endSetInteval Function END");
 }
 
 function curlParseASPX(body){

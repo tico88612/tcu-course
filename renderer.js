@@ -27,12 +27,17 @@ function loginSuccess(params) {
 }
 
 function startRun(params){
+    let userCourseId = document.getElementById('courseID1').value
+    ipcRenderer.send('start-run-function', userCourseId)
+
     document.getElementById('courseID1').disabled = true;
     document.getElementById('startRunBtn').disabled = true;
     document.getElementById('endRunBtn').disabled = false;
 }
 
 function endRun(params) {
+    ipcRenderer.send('end-run-function')
+    
     document.getElementById('courseID1').disabled = false;
     document.getElementById('startRunBtn').disabled = false;
     document.getElementById('endRunBtn').disabled = true;
