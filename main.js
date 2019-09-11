@@ -60,9 +60,9 @@ const { ipcMain } = require('electron')
 const rp = require('request-promise')
 const querystring = require('querystring')
 
-let __EVENTTARGET, __EVENTARGUMENT, __VIEWSTATE, __VIEWSTATEENCRYPTED, __EVENTVALIDATION
-let userId, userPwd;
-let userCookie;
+let __EVENTTARGET = "", __EVENTARGUMENT = "", __VIEWSTATE = "", __VIEWSTATEENCRYPTED = "", __EVENTVALIDATION = ""
+let userId = "", userPwd = "";
+let userCookie = "";
 
 ipcMain.on('login-user-function', startSession)
 
@@ -201,7 +201,7 @@ async function useRequestPromise(options) {
     }
     else {
       if (response.headers["set-cookie"]) {
-        userCookie = response.headers["set-cookie"][0]
+        userCookie += response.headers["set-cookie"][0]
       }
     }
 
