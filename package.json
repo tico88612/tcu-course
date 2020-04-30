@@ -28,7 +28,7 @@
   "dependencies": {
     "bulma": "^0.7.5",
     "electron-log": "^3.0.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
