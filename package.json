@@ -1,6 +1,6 @@
 {
   "name": "tcu-course",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A minimal Rush TCU Course",
   "main": "main.js",
   "scripts": {
@@ -20,19 +20,20 @@
   "author": "tico88612",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^7.1.7",
-    "electron-builder": "^21.2.0",
-    "electron-packager": "^14.1.1",
-    "node-sass": "^4.13.0"
+    "electron": "^9.0.3",
+    "electron-builder": "^22.7.0",
+    "electron-packager": "^14.2.1",
+    "node-sass": "^4.14.1"
   },
   "dependencies": {
     "bulma": "^0.7.5",
     "electron-log": "^3.0.9",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "minimist": ">=1.2.3"
   },
   "build": {
     "productName": "慈濟大學 搶課系統",
